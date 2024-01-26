@@ -21,7 +21,6 @@ jobs:
     steps:
     - name: Checkout  # check out our repo
       uses: actions/checkout@v3
-    
     - name: Log in to the container registry
       uses: docker/login-action@v2
       with:
@@ -29,7 +28,7 @@ jobs:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    # generate the tags that we'll use to name our image
+  # generate the tags that we'll use to name our image
     - name: Get Docker metadata
       id: meta
       uses: docker/metadata-action@v4
@@ -38,8 +37,8 @@ jobs:
         tags: | # tag with commit hash and with 'latest'
           type=sha 
           type=raw,value=latest,enable={{is_default_branch}}
-    
-    # build and push our image, using output from previous step
+  
+  # build and push our image, using output from previous step
     - name: Build and push Docker image
       uses: docker/build-push-action@v3
       with:
